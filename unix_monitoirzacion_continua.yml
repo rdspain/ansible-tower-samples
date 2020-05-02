@@ -1,8 +1,0 @@
-#ayalat Abril 2020
----
-- name: Unix
-  hosts: unix
-  gather_facts: false
-  tasks:
-    - name: Hacerles ping
-      ping:
