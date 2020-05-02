@@ -1,1 +1,18 @@
+#ayalat Abril 2020
+---
+- name: Windows
+  hosts: windows
+  gather_facts: false
+  tasks:
+    - name: Hacerles ping
+      win_ping:
 
+    - name: Search-only, return list of found updates (if any), log to C:\ansible_wu.txt
+      win_updates:
+        category_names: SecurityUpdates
+        state: searched
+        log_path: C:\ansible_wu.txt
+
+#    - name: Search and download Windows updates without installing them
+#      win_updates:
+#        state: downloaded
