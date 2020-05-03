@@ -1,0 +1,8 @@
+#ayalat Abril 2020
+---
+- name: Windows monitorizacion continua
+  hosts: windows
+  gather_facts: false
+  tasks:
+    - name: Hacerles ping
+      win_ping:
