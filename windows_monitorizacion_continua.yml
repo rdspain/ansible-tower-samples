@@ -6,3 +6,14 @@
   tasks:
     - name: Hacerles ping
       win_ping:
+
+    - name: Ensure that WinRM is started when the system has settled
+      win_service:
+        name: WinRM
+        start_mode: delayed
+
+    - name: Check if Windows Update is installed
+      win_service:
+        name: wuauserv
+        register: service_info
+
