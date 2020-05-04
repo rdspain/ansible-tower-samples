@@ -17,3 +17,9 @@
         name: wuauserv
         register: service_info
 
+    - name: Checking web del Ansible Tower Lab
+      win_uri:
+        url: https://ansibletowerlab
+        validate_certs: no
+
+
