@@ -2,7 +2,10 @@
 ---
 - name: windows
   hosts: windows
-  gather_facts: true
+  gather_facts: false
   tasks:
-    - name: Fetch c:\windows\system32\drivers\etc\hosts
-      fetch: dest=/root/backup_config/{{ansible_hostname}}/hosts src=c:\windows\system32\drivers\etc\hosts flat=yes
+    - name: Specifying a path directly
+      fetch:
+        src: c:\windows\system32\drivers\etc\hosts
+        dest: /root/backup_config/{{ inventory_hostname }}/
+        flat: yes
