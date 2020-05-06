@@ -1,8 +1,0 @@
-#ayalat Abril 2020
----
-- name: Backup ficheros de configuracion
-  hosts: windows
-#  gather_facts: true
-  tasks:
-    - name: Fetch c:\windows\system32\drivers\etc\hosts
-      fetch: dest=/root/backup_config/{{ansible_hostname}}/hosts src=c:\windows\system32\drivers\etc\hosts flat=yes
