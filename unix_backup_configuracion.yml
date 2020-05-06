@@ -1,0 +1,12 @@
+#ayalat Abril 2020
+---
+- name: Unix
+  hosts: unix
+  gather_facts: true
+  become: yes
+  tasks:
+    - name: Fetch /etc/hosts
+      fetch: dest=/root/backup_config/{{ansible_hostname}}/hosts src=/etc/hosts flat=yes
+
+    - name: Fetch /etc/resolv.conf
+      fetch: dest=/root/backup_config/{{ansible_hostname}}/resolv.conf src=/etc/resolv.conf flat=yes
