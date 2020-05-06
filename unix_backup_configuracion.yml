@@ -5,8 +5,14 @@
   gather_facts: true
 #  become: yes
   tasks:
-    - name: Fetch /etc/hosts
-      fetch: dest=/root/backup_config/{{ansible_hostname}}/hosts src=/etc/hosts flat=yes
+#    - name: Fetch /etc/hosts
+#      fetch: dest=/root/backup_config/{{ansible_hostname}}/hosts src=/etc/hosts flat=yes
+#
+#    - name: Fetch /etc/resolv.conf
+#      fetch: dest=/root/backup_config/{{ansible_hostname}}/resolv.conf src=/etc/resolv.conf flat=yes
+#      
+    - name: Debug ansible_host locally
+      local_action: debug var=ansible_host
 
-    - name: Fetch /etc/resolv.conf
-      fetch: dest=/root/backup_config/{{ansible_hostname}}/resolv.conf src=/etc/resolv.conf flat=yes
+    - name: Debug ansible_host remotel
+      debug: var=ansible_host
