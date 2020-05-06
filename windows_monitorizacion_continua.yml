@@ -21,5 +21,11 @@
       win_uri:
         url: https://ansibletowerlab
         validate_certs: no
+        
+    - name: Checking web de Google
+      win_uri:
+        url: https://www.google.es/
+#        validate_certs: no
+
 
 
