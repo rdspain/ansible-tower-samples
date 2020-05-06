@@ -6,4 +6,13 @@
   tasks:
     - name: Hacerles ping
       ping:
-    
+
+    - name: Checking web del Ansible Tower Lab
+      uri:
+        url: https://redhattowerlab
+        validate_certs: no
+
+    - name: Checking web de Google
+      uri:
+        url: https://www.google.es/
+#        validate_certs: no
