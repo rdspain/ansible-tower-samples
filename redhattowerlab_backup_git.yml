@@ -2,7 +2,7 @@
 ---
 - name: GitHub Repositories
   hosts: redhattowerlab
-  gather_facts: false
+  gather_facts: true
   tasks:
     - name: Download https://github.com/rdspain/ansible-tower-samples.git
       git:
