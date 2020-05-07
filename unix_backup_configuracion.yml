@@ -7,11 +7,11 @@
     - name: copia del fichero /etc/hosts
       fetch:
         src: /etc/hosts
-        dest: /root/backup_config/{{ inventory_hostname }}/
+        dest: /ansible/backup_configuracion/{{ inventory_hostname }}/
         flat: yes
 
     - name: copia del fichero /etc/resolv.conf
       fetch:
         src: /etc/resolv.conf
-        dest: /root/backup_config/{{ inventory_hostname }}/
+        dest: /ansible/backup_configuracion/{{ inventory_hostname }}/
         flat: yes
