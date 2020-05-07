@@ -1,0 +1,10 @@
+#ayalat Abril 2020
+---
+- name: GitHub Repositories
+  hosts: localhost
+  gather_facts: false
+  tasks:
+    - name: Download https://github.com/rdspain/ansible-tower-samples.git
+      git:
+        repo: https://github.com/rdspain/ansible-tower-samples.git
+        dest: /ansible/backup_configuracion/GitHub/ansible-tower-samples/
