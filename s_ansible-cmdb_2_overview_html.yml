@@ -1,0 +1,9 @@
+#ayalat Abril 2020
+#ejecutamos script en el tower y genera el fichero /ansible/backup_configuracion/overview.html
+---
+- name: Recogida de los ficheros de configuracion de los servers UNIX
+  hosts: localhost
+  gather_facts: true
+  tasks:
+    - name: Ejecutar shell de configuracion de los nodos
+      script: /etc/ansible/playbooks/scripts/s_ansible-cmdb_2_overview_html/s_ansible-cmdb_2_overview_html.sh
