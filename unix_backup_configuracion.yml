@@ -1,8 +1,8 @@
 #ayalat Abril 2020
 ---
-- name: unix
+- name: Recogida de los ficheros de configuracion de los servers UNIX
   hosts: unix
-  gather_facts: false
+  gather_facts: true
   tasks:
     - name: copia del fichero /etc/hosts
       fetch:
