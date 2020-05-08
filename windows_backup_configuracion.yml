@@ -9,3 +9,4 @@
         src: c:\windows\system32\drivers\etc\hosts
         dest: /ansible/backup_configuracion/{{ inventory_hostname }}/
         flat: yes
+
