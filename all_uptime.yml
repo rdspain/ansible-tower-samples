@@ -1,0 +1,11 @@
+#ayalat Abril 2020
+---
+- name: Control de reinicio de servidores
+  hosts: all
+  tasks:
+    - name: "Check for machines that have an uptime that exceeds 3 days"
+      shell: echo "$(hostname) has been up for $(uptime | cut -d ',' -f 1 | cut -d ' ' -f 4) days"
+      when: ansible_uptime_seconds >  600000000000000000000
+      register: uptime_exceeded
+
+    - debug: var=uptime_exceeded.stdout_lines
