@@ -1,0 +1,21 @@
+#ayalat Abril 2020
+---
+- name: Windows
+  hosts: windows
+  gather_facts: false
+  tasks:
+    - name: Hacerles ping
+      win_ping:
+
+    - name: Search and download Windows updates without installing them and log to C:\ansible_wu_downloaded.txt
+      win_updates:
+        category_names:
+          - Application
+          - CriticalUpdates
+          - DefinitionUpdates
+          - SecurityUpdates
+          - Updates
+        blacklist:
+          - Microsoft Silverlight
+        state: downloaded
+        log_path: C:\ansible_wu_downloaded.txt
