@@ -7,12 +7,17 @@
     - name: Hacerles ping
       win_ping:
 
-    - name: Search-only, return list of found updates (if any), log to C:\ansible_wu.txt
+    - name: Search-only, return list of found updates (if any), log to C:\ansible_wu_searched.txt
       win_updates:
-        category_names: SecurityUpdates
+        category_names:
+          - Application
+          - CriticalUpdates
+          - DefinitionUpdates
+          - SecurityUpdates
+          - Updates
+        blacklist:
+          - Microsoft Silverlight
         state: searched
-        log_path: C:\ansible_wu.txt
+        log_path: C:\ansible_wu_searched.txt
 
-#    - name: Search and download Windows updates without installing them
-#      win_updates:
-#        state: downloaded
+
