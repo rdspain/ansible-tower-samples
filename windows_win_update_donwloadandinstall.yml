@@ -1,0 +1,35 @@
+#ayalat Abril 2020
+---
+- name: Windows
+  hosts: windows
+  gather_facts: false
+  tasks:
+    - name: Hacerles ping
+      win_ping:
+
+    - name: Search and download Windows updates without installing them and log to C:\ansible_wu_downloaded.txt
+      win_updates:
+        category_names:
+          - Application
+          - CriticalUpdates
+          - DefinitionUpdates
+          - SecurityUpdates
+          - Updates
+        blacklist:
+          - Microsoft Silverlight
+        state: downloaded
+        log_path: C:\ansible_wu_downloaded.txt
+
+    - name: Install all security, critical, and rollup updates without a scheduled task and log to C:\ansible_wu_installed.txt
+      win_updates:
+        category_names:
+          - Application
+          - CriticalUpdates
+          - DefinitionUpdates
+          - SecurityUpdates
+          - Updates
+        blacklist:
+          - Microsoft Silverlight
+        reboot: yes
+        reboot_timeout: 300
+        log_path: C:\ansible_wu_installed.txt
