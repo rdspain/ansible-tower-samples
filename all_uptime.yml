@@ -3,9 +3,6 @@
 - name: Control de reinicio de servidores
   hosts: all
   tasks:
-    - name: "Check for machines that have an uptime that exceeds 3 days"
-      shell: echo "$(hostname) has been up for $(uptime | cut -d ',' -f 1 | cut -d ' ' -f 4) days"
-      when: ansible_uptime_seconds >  6
-      register: uptime_exceeded
-
-    - debug: var=uptime_exceeded.stdout_lines
+  - debug:
+      msg: " {{ ansible_fqdn }} - {{ ansible_hostname }} : hace más de  {{ ansible_uptime_seconds }} segundos que no se reinicia. Toca reiniciarlo."
+    when: ansible_uptime_seconds > 3024000
