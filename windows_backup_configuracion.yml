@@ -4,7 +4,7 @@
   hosts: windows
   gather_facts: false
   tasks:
-    - name: Copy c:\windows\system32\drivers\etc\hosts
+    - name: Copy c:\windows\system32\drivers\etc\hosts to /ansible/backup_configuracion/{{ inventory_hostname }}/
       fetch:
         src: c:\windows\system32\drivers\etc\hosts
         dest: /ansible/backup_configuracion/{{ inventory_hostname }}/
