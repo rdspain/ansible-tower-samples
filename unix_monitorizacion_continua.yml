@@ -18,9 +18,9 @@
 #        validate_certs: no
 
     - name: Checking web del Smartlis entorno Lab
-      win_uri:
+      uri:
         url: http://smartlis.lan/smartlis
 
     - name: Checking web del Smartlis Twisted entorno Lab
-      win_uri:
+      uri:
         url: http://test.smartlis.lan/smartlis
