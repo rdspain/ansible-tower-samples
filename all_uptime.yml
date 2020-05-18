@@ -3,6 +3,14 @@
 - name: Control de reinicio de servidores
   hosts: all
   tasks:
-  - debug:
-      msg: " {{ ansible_fqdn }} - {{ ansible_hostname }} : hace más de  {{ ansible_uptime_seconds }} segundos que no se reinicia. Toca reiniciarlo."
-    when: ansible_uptime_seconds > 3024000
+  - name: Mirando cuánto tiempo hace que no se reinician los servidores
+    debug:
+      msg: "WARNING!!! {{ ansible_fqdn }} - {{ ansible_hostname }} : hace más de {{ ( ansible_uptime_seconds / 86400 ) | int }} dias que no se reinicia."
+
+  - name: Si hace más de 35 días que no se reinician, avisaré por Slack en \#lab
+    slack:
+      domain: "{{ slack_domain }}"
+      token: "{{ slack_token_lab }}"
+      msg: "WARNING!!! {{ ansible_fqdn }} - {{ ansible_hostname }} : hace más de {{ ( ansible_uptime_seconds / 86400 ) | int }} dias que no se reinicia. Toca reiniciarlo por lo menos cada 35 días."
+    when: ( ansible_uptime_seconds / 86400 ) | int > 35
+    delegate_to: localhost
