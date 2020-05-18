@@ -11,6 +11,6 @@
     slack:
       domain: "{{ slack_domain }}"
       token: "{{ slack_token_lab }}"
-      msg: "WARNING!!! {{ ansible_fqdn }} - {{ ansible_hostname }} : hace más de {{ ( ansible_uptime_seconds / 86400 ) | int }} dias que no se reinicia. Toca reiniciarlo por lo menos cada 35 días."
+      msg: "ANSIBLE_LAB AVISO !!! {{ ansible_fqdn }} - {{ ansible_hostname }} : hace más de {{ ( ansible_uptime_seconds / 86400 ) | int }} dias que no se reinicia. Toca reiniciarlo por lo menos cada 35 días."
     when: ( ansible_uptime_seconds / 86400 ) | int > 35
     delegate_to: localhost
