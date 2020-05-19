@@ -17,3 +17,4 @@
         msg: "ANSIBLE ERROR !!! {{ shell_output.stdout}} no responde."
       when: shell_output.stdout != ""
       delegate_to: localhost
+      
