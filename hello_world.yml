@@ -1,4 +1,3 @@
-[root@redhattowerlab all]# vi hello_world.yml
 #ayalat Abril 2020
 ---
 - name: Control de comunicación con servidores
