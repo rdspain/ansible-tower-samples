@@ -1,8 +1,19 @@
-- name: Hello World
-  hosts: all
-  gather_facts: no
+#ayalat Abril 2020
+---
+- name: Control de comunicación con servidores
+  hosts: localhost
+  gather_facts: false
   tasks:
-    - name: Hello Message
-      debug:
-        msg: "Hola Ansible's desde Ansible Tower Lab!"
+    - name: notificar_slack
+      shell: ansible all -m setup | grep " UNREACHABLE\!" | awk '{print $1}'
+      register: shell_output
 
+    - debug: var=shell_output.stdout
+
+    - name: Si hace más de 35 días que no se reinician, avisaré por Slack en \#lab
+      slack:
+        domain: "{{ slack_domain }}"
+        token: "{{ slack_token_lab }}"
+        msg: "ANSIBLE ERROR !!! {{ shell_output.stdout}} no responde."
+      when: shell_output.stdout != ""
+      delegate_to: localhost
