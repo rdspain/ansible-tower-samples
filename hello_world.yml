@@ -14,7 +14,7 @@
       slack:
         domain: "{{ slack_domain }}"
         token: "{{ slack_token_lab }}"
-        msg: "{{ shell_output.stdout }} no responde."
+        msg: "ANSIBLE ERROR !!! {{ shell_output.stdout }} no responde/n."
       when: shell_output.stdout != ""
       delegate_to: localhost
-      
+     
