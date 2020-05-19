@@ -1,3 +1,4 @@
+[root@redhattowerlab all]# vi hello_world.yml
 #ayalat Abril 2020
 ---
 - name: Control de comunicación con servidores
@@ -7,6 +8,10 @@
     - name: notificar_slack
       shell: ansible all -m setup | grep " UNREACHABLE\!" | awk '{print $1}'
       register: shell_output
+
+    - debug:
+        msg: "{{ shell_output }}"
+      when: shell_output.stdout is defined
 
     - name: Avisar por Slack
       slack:
