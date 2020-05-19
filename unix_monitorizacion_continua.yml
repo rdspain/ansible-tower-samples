@@ -2,25 +2,95 @@
 ---
 - name: Unix
   hosts: unix
-  gather_facts: false
+  gather_facts: true
   tasks:
-    - name: Hacerles ping
-      ping:
 
-    - name: Checking web del Ansible Tower Lab
+    - name: Buscar servidores caídos
+      shell: ansible unix -m ping | grep " UNREACHABLE\!" | awk '{print $1}'
+      register: command_result
+
+    - debug:
+        var: command_result
+
+    - name: Avisaré por Slack en \#lab de los servers caídos
+      slack:
+        domain: "{{ slack_domain }}"
+        token: "{{ slack_token_lab }}"
+        msg: "ANSIBLE AVISO !!! {{ command_result.stdout_lines }} no responde a ping."
+      when: ( command_result.stdout != "" )
+      delegate_to: localhost
+
+
+    - name: Checking website availability
       uri:
         url: https://redhattowerlab
         validate_certs: no
+      register: command_result
+      ignore_errors: yes
 
-    - name: Checking web de Google
+    - debug:
+        var: command_result
+
+    - name: Notificar a Slack Lab
+      slack:
+        domain: "{{ slack_domain }}"
+        token: "{{ slack_token_lab }}"
+        msg: "ANSIBLE ERROR !!! {{ ansible_hostname }} : no puedo acceder a https://redhattowerlab"
+      when: command_result.changed == true or 'OK' not in command_result.msg
+      delegate_to: localhost
+
+    - name: Checking website availability
       uri:
         url: https://www.google.es/
-#        validate_certs: no
+        validate_certs: no
+      register: command_result
+      ignore_errors: yes
 
-    - name: Checking web del Smartlis entorno Lab
+    - debug:
+        var: command_result
+
+    - name: Notificar a Slack Lab
+      slack:
+        domain: "{{ slack_domain }}"
+        token: "{{ slack_token_lab }}"
+        msg: "ANSIBLE ERROR !!! {{ ansible_hostname }} : no puedo acceder a https://www.google.es/"
+      when: command_result.changed == true or 'OK' not in command_result.msg
+      delegate_to: localhost
+
+    - name: Checking website availability
       uri:
         url: http://smartlis.lan/smartlis
+        validate_certs: no
+      register: command_result
+      ignore_errors: yes
 
-    - name: Checking web del Smartlis Twisted entorno Lab
+    - debug:
+        var: command_result
+
+    - name: Notificar a Slack Lab
+      slack:
+        domain: "{{ slack_domain }}"
+        token: "{{ slack_token_lab }}"
+        msg: "ANSIBLE ERROR !!! {{ ansible_hostname }} : no puedo acceder a http://smartlis.lan/smartlis"
+      when: command_result.changed == true or 'OK' not in command_result.msg
+      delegate_to: localhost
+
+
+    - name: Checking website availability
       uri:
         url: http://test.smartlis.lan/smartlis
+        validate_certs: no
+      register: command_result
+      ignore_errors: yes
+
+    - debug:
+        var: command_result
+
+    - name: Notificar a Slack Lab
+      slack:
+        domain: "{{ slack_domain }}"
+        token: "{{ slack_token_lab }}"
+        msg: "ANSIBLE ERROR !!! {{ ansible_hostname }} : no puedo acceder a http://test.smartlis.lan/smartlis"
+      when: command_result.changed == true or 'OK' not in command_result.msg
+      delegate_to: localhost
+
