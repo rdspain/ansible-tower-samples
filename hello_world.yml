@@ -8,8 +8,6 @@
       shell: ansible all -m setup | grep " UNREACHABLE\!" | awk '{print $1}'
       register: shell_output
 
-    - debug: var=shell_output.stdout
-
     - name: Avisar por Slack
       slack:
         domain: "{{ slack_domain }}"
