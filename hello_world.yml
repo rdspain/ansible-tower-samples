@@ -1,20 +1,21 @@
 #ayalat Abril 2020
 ---
 - name: Control de comunicación con servidores
-  hosts: localhost
+  hosts: unix
   gather_facts: false
   tasks:
     - name: Buscar servidores caídos
       shell: ansible all -m setup | grep " UNREACHABLE\!" | awk '{print $1}'
-      register: stp
+      register: command_result
 
-    - debug: msg={{ stp.stdout_lines }}
+    - debug:
+        var: command_result
 
 
     - name: Avisaré por Slack en \#lab de los servers caídos
       slack:
         domain: "{{ slack_domain }}"
         token: "{{ slack_token_lab }}"
-        msg: "ANSIBLE AVISO !!! {{ stp.stdout_lines }}."
-      when: ( stp.stdout != "" )
+        msg: "ANSIBLE AVISO !!! {{ command_result.stdout_lines }} no resoponde/n al setup."
+      when: ( command_result.stdout != "" )
       delegate_to: localhost
