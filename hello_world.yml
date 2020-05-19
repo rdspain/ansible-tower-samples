@@ -8,12 +8,12 @@
       shell: ansible all -m setup | grep " UNREACHABLE\!" | awk '{print $1}'
       register: shell_output
 
-    - debug: var=shell_output.stdout_lines|list
+    - debug: var=shell_output.stdout
 
     - name: Avisar por Slack
       slack:
         domain: "{{ slack_domain }}"
         token: "{{ slack_token_lab }}"
-        msg: "ANSIBLE ERROR !!! Servidor/es {{ shell_output.stdout_lines|list | replace('] ',' ') | replace('[u','') }} no responde/n."
+        msg: "ANSIBLE ERROR !!! Servidor/es {{ shell_output.stdout }} no responde/n."
       when: shell_output.stdout != ""
       delegate_to: localhost
