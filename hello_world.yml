@@ -9,13 +9,6 @@
       register: shell_output
 
     - debug:
-        msg: "{{ shell_output }}"
+        msg: "{{ shell_output }} | replace ('Ke30=[4D[K[KeyJ1dWlkIjogIjliMGM5MTZiLWIzNzQtNGVjNi04OTZhLTlhMGMxODNmYzRmOCJ9[64D[K[1;31m','')"
       when: shell_output.stdout is defined
 
-    - name: Avisar por Slack
-      slack:
-        domain: "{{ slack_domain }}"
-        token: "{{ slack_token_lab }}"
-        msg: "ANSIBLE ERROR !!! Servidor/es {{ shell_output.stdout }} no responde/n."
-      when: shell_output.stdout != ""
-      delegate_to: localhost
