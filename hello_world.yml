@@ -10,7 +10,7 @@
 
     - debug: var=shell_output.stdout
 
-    - name: Si hace más de 35 días que no se reinician, avisaré por Slack en \#lab
+    - name: Avisar por Slack
       slack:
         domain: "{{ slack_domain }}"
         token: "{{ slack_token_lab }}"
