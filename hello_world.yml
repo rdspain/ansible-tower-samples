@@ -5,7 +5,7 @@
   gather_facts: false
   tasks:
     - name: Buscar servidores caídos
-      shell: ansible all -m setup | grep " UNREACHABLE\!" | awk '{print $1}'
+      shell: ansible all:!ubuntulab -m setup | grep " UNREACHABLE\!" | awk '{print $1}'
       register: command_result
 
     - debug:
