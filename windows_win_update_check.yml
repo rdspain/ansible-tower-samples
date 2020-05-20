@@ -1,13 +1,12 @@
 #ayalat Abril 2020
 ---
-- name: Windows
+- name: Buscar actualizaciones de windows
   hosts: windows
-  gather_facts: false
   tasks:
     - name: Hacerles ping
       win_ping:
 
-    - name: Search-only, return list of found updates (if any), log to C:\ansible_wu_searched.txt
+    - name: Buscar actualizaciones e informar en fichero
       win_updates:
         category_names:
           - Application
@@ -15,9 +14,13 @@
           - DefinitionUpdates
           - SecurityUpdates
           - Updates
-        blacklist:
-          - Microsoft Silverlight
         state: searched
-        log_path: C:\ansible_wu_searched.txt
+        log_path: C:\{{ inventory_hostname }}_ansible_wu_searched.txt
+
+    - name: Copiar fichero a servidor ansible
+      fetch:
+        src: C:\{{ inventory_hostname }}_ansible_wu_searched.txt
+        dest: /ansible/backup_configuracion/{{ inventory_hostname }}/
+        flat: yes
 
 
