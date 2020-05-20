@@ -11,8 +11,7 @@
     - debug:
         var: command_result
 
-
-    - name: Avisaré por Slack en \#lab de los servers caídos    
+    - name: Avisaré por Slack en \#lab de los servers caídos
       slack:
         domain: "{{ slack_domain }}"
         token: "{{ slack_token_lab }}"
