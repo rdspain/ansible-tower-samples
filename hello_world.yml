@@ -15,5 +15,5 @@
         domain: "{{ slack_domain }}"
         token: "{{ slack_token_lab }}"
         msg: "ANSIBLE AVISO !!! {{ command_result.stdout_lines|list }} no resoponde/n al ssh."
-      when: ( command_result.stdout_lines|list != "" )
+      when: ( command_result.stdout_lines|list != "[]" )
       delegate_to: localhost
