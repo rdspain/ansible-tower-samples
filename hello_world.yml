@@ -12,10 +12,10 @@
         var: command_result
 
 
-    - name: Avisaré por Slack en \#lab de los servers caídos
-      slack:
-        domain: "{{ slack_domain }}"
-        token: "{{ slack_token_lab }}"
-        msg: "ANSIBLE AVISO !!! {{ command_result.stdout_lines }} no resoponde/n al setup."
-      when: ( command_result.stdout != "" )
-      delegate_to: localhost
+ #   - name: Avisaré por Slack en \#lab de los servers caídos
+ #     slack:
+ #       domain: "{{ slack_domain }}"
+ #       token: "{{ slack_token_lab }}"
+ #       msg: "ANSIBLE AVISO !!! {{ command_result.stdout_lines }} no resoponde/n al setup."
+ #     when: ( command_result.stdout != "" )
+ #     delegate_to: localhost
