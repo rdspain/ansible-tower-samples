@@ -7,7 +7,7 @@
     - name: Hacerles ping
       win_ping:
 
-    - name: Search and download Windows updates without installing them and log to C:\ansible_wu_downloaded.txt
+    - name: Search and download Windows updates without installing them
       win_updates:
         category_names:
           - Application
@@ -15,12 +15,18 @@
           - DefinitionUpdates
           - SecurityUpdates
           - Updates
-        blacklist:
-          - Microsoft Silverlight
+#        blacklist:
+#          - Microsoft Silverlight
         state: downloaded
-        log_path: C:\ansible_wu_downloaded.txt
+        log_path: C:\{{ inventory_hostname }}_ansible_wu_searched_and_downloaded.txt
 
-    - name: Install all security, critical, and rollup updates without a scheduled task and log to C:\ansible_wu_installed.txt
+    - name: Copiar fichero a servidor ansible
+      fetch:
+        src: C:\{{ inventory_hostname }}_ansible_wu_searched_and_downloaded.txt
+        dest: /ansible/backup_configuracion/{{ inventory_hostname }}/
+        flat: yes
+
+    - name: Install Windows Updates and reboot
       win_updates:
         category_names:
           - Application
@@ -28,8 +34,15 @@
           - DefinitionUpdates
           - SecurityUpdates
           - Updates
-        blacklist:
-          - Microsoft Silverlight
+#        blacklist:
+#          - Microsoft Silverlight
         reboot: yes
         reboot_timeout: 300
-        log_path: C:\ansible_wu_installed.txt
+        log_path: C:\{{ inventory_hostname }}_ansible_wu_updated.txt
+
+    - name: Copiar fichero a servidor ansible
+      fetch:
+        src: C:\{{ inventory_hostname }}_ansible_wu_updated.txt
+        dest: /ansible/backup_configuracion/{{ inventory_hostname }}/
+        flat: yes
+
