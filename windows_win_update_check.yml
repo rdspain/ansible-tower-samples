@@ -1,7 +1,7 @@
 #ayalat Abril 2020
 ---
 - name: Buscar actualizaciones de windows
-  hosts: windows
+  hosts: windows:!winserver100:!winserver135
   tasks:
     - name: Hacerles ping
       win_ping:
@@ -22,5 +22,12 @@
         src: C:\{{ inventory_hostname }}_ansible_wu_searched.txt
         dest: /ansible/backup_configuracion/{{ inventory_hostname }}/
         flat: yes
+
+    - name: Avisaré por Slack lab
+      slack:
+        domain: "{{ slack_domain }}"
+        token: "{{ slack_token_lab }}"
+        msg: "ANSIBLE INFO !!! Ya está disponible en /ansible/backup_configuracion/{{ inventory_hostname }}/{{ inventory_hostname }}_ansible_wu_searched.txt el informe de parches para actualizar. Ruego le eches un vistazo y sino dices nada, haré la actualización automática.
+      delegate_to: localhost
 
 
