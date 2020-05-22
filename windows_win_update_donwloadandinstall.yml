@@ -61,3 +61,4 @@
         msg: "ANSIBLE INFO !!! Ya está disponible en /ansible/backup_configuracion/{{ inventory_hostname }}/{{ inventory_hostname }}_ansible_wu_updated.txt el informe de parches actualizados. Ya están instalados. Ruego le eches un vistazo.
       delegate_to: localhost
 
+
