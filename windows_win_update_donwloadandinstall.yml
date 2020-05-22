@@ -15,8 +15,6 @@
           - DefinitionUpdates
           - SecurityUpdates
           - Updates
-#        blacklist:
-#          - Microsoft Silverlight
         state: downloaded
         log_path: C:\{{ inventory_hostname }}_ansible_wu_searched_and_downloaded.txt
 
@@ -42,8 +40,6 @@
           - DefinitionUpdates
           - SecurityUpdates
           - Updates
-#        blacklist:
-#          - Microsoft Silverlight
         reboot: yes
         reboot_timeout: 300
         log_path: C:\{{ inventory_hostname }}_ansible_wu_updated.txt
