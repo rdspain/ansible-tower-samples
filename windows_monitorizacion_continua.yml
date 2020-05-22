@@ -1,6 +1,6 @@
 #ayalat Abril 2020
 ---
-- name: Windows monitorizacion continua
+- name: Windows monitorizacion continua común
   hosts: windows
   gather_facts: false
   tasks:
@@ -17,15 +17,28 @@
         name: wuauserv
         register: service_info
 
-    - name: Checking web del Ansible Tower Lab
-      win_uri:
-        url: https://ansibletowerlab
-        validate_certs: no
-        
+    - name: Set service startup mode to manual
+      win_service:
+        name: wuauserv
+        start_mode: manual
+       # state: started
+
     - name: Checking web de Google
       win_uri:
         url: https://www.google.es/
 #        validate_certs: no
+
+
+
+- name: Windows monitorizacion continua win10lab
+  hosts: win10lab
+  gather_facts: false
+  tasks:
+
+    - name: Checking web del Ansible Tower Lab
+      win_uri:
+        url: https://ansibletowerlab
+        validate_certs: no
 
     - name: Checking web del Smartlis entorno Lab
       win_uri:
@@ -34,7 +47,4 @@
     - name: Checking web del Smartlis Twisted entorno Lab
       win_uri:
         url: http://test.smartlis.lan/smartlis
-
-
-
 
