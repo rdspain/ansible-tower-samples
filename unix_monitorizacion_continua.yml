@@ -1,7 +1,7 @@
 #ayalat Abril 2020
 ---
 - name: Unix
-  hosts: unix
+  hosts: localhost
   gather_facts: true
   tasks:
 
@@ -12,7 +12,7 @@
     - debug:
         var: command_result
 
-    - name: Avisaré por Slack en \#lab de los servers caídos
+    - name: Avisaré por Slack en el canal lab de los servers caídos
       slack:
         domain: "{{ slack_domain }}"
         token: "{{ slack_token_lab }}"
@@ -57,6 +57,7 @@
       when: command_result.changed == true or 'OK' not in command_result.msg
       delegate_to: localhost
 
+
     - name: Checking website availability
       uri:
         url: http://smartlis.lan/smartlis
@@ -75,7 +76,6 @@
       when: command_result.changed == true or 'OK' not in command_result.msg
       delegate_to: localhost
 
-
     - name: Checking website availability
       uri:
         url: http://test.smartlis.lan/smartlis
@@ -93,4 +93,3 @@
         msg: "ANSIBLE ERROR !!! {{ ansible_hostname }} : no puedo acceder a http://test.smartlis.lan/smartlis"
       when: command_result.changed == true or 'OK' not in command_result.msg
       delegate_to: localhost
-
