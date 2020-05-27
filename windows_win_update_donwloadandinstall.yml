@@ -28,7 +28,7 @@
       slack:
         domain: "{{ slack_domain }}"
         token: "{{ slack_token_lab }}"
-        msg: "ANSIBLE INFO !!! Ya está disponible en /ansible/backup_configuracion/{{ inventory_hostname }}/{{ inventory_hostname }}_ansible_wu_searched_and_downloaded.txt. Me dispongo a instalarlos. Te aviso cuando haya acabado.
+        msg: "ANSIBLE INFO !!! Ya está disponible en /ansible/backup_configuracion/{{ inventory_hostname }}/{{ inventory_hostname }}_ansible_wu_searched_and_downloaded.txt. Me dispongo a instalarlos. Te aviso cuando haya acabado."
       delegate_to: localhost
 
 
@@ -54,7 +54,7 @@
       slack:
         domain: "{{ slack_domain }}"
         token: "{{ slack_token_lab }}"
-        msg: "ANSIBLE INFO !!! Ya está disponible en /ansible/backup_configuracion/{{ inventory_hostname }}/{{ inventory_hostname }}_ansible_wu_updated.txt el informe de parches actualizados. Ya están instalados. Ruego le eches un vistazo.
+        msg: "ANSIBLE INFO !!! Ya está disponible en /ansible/backup_configuracion/{{ inventory_hostname }}/{{ inventory_hostname }}_ansible_wu_updated.txt el informe de parches actualizados. Ya están instalados. Ruego le eches un vistazo."
       delegate_to: localhost
 
 
