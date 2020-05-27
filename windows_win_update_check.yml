@@ -1,7 +1,8 @@
 #ayalat Abril 2020
 ---
+#more info in https://docs.ansible.com/ansible/latest/modules/win_updates_module.html
 - name: Buscar actualizaciones de windows
-  hosts: windows:!winserver100:!winserver135
+  hosts: windows
   tasks:
     - name: Hacerles ping
       win_ping:
