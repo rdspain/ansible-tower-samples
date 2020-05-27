@@ -29,3 +29,4 @@
         token: "{{ slack_token_lab }}"
         msg: "ANSIBLE INFO !!! Ruego revises /ansible/backup_configuracion/{{ inventory_hostname }}/{{ inventory_hostname }}_ansible_wu_searched.txt el informe de parches para actualizar.
       delegate_to: localhost
+      
