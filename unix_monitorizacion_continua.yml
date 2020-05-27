@@ -1,16 +1,13 @@
 #ayalat Abril 2020
 ---
-- name: Unix
+- name: Unix monitorización
   hosts: localhost
-  gather_facts: true
   tasks:
 
     - name: Buscar servidores caídos
       shell: ansible unix -m ping | grep " UNREACHABLE\!" | awk '{print $1}'
       register: command_result
 
-    - debug:
-        var: command_result
 
     - name: Avisaré por Slack en el canal lab de los servers caídos
       slack:
@@ -28,8 +25,6 @@
       register: command_result
       ignore_errors: yes
 
-    - debug:
-        var: command_result
 
     - name: Notificar a Slack Lab
       slack:
@@ -45,9 +40,6 @@
         validate_certs: no
       register: command_result
       ignore_errors: yes
-
-    - debug:
-        var: command_result
 
     - name: Notificar a Slack Lab
       slack:
@@ -65,8 +57,6 @@
       register: command_result
       ignore_errors: yes
 
-    - debug:
-        var: command_result
 
     - name: Notificar a Slack Lab
       slack:
@@ -83,9 +73,6 @@
       register: command_result
       ignore_errors: yes
 
-    - debug:
-        var: command_result
-
     - name: Notificar a Slack Lab
       slack:
         domain: "{{ slack_domain }}"
@@ -93,3 +80,19 @@
         msg: "ANSIBLE ERROR !!! {{ ansible_hostname }} : no puedo acceder a http://test.smartlis.lan/smartlis"
       when: command_result.changed == true or 'OK' not in command_result.msg
       delegate_to: localhost
+
+- name: Unix espacio en disco
+  hosts: unix
+  tasks:
+  - name: Check freespace ocupacion
+    shell:  df -h --output=target,avail,pcent | sed 's/%//g' | awk '{print $3}' | grep -viE "a|e|i|o|u" | awk '$1 > 85'
+    register: ocupacion
+
+  - name: notificar slacknotificar slacknotificar slacknotificar slack
+    slack:
+      domain: "{{ slack_domain }}"
+      token: "{{ slack_token_lab }}"
+      msg: "ANSIBLE OJO !!! {{ ansible_fqdn }} - {{ ansible_hostname }} : filesystem al {{ item }}% de ocupación."
+    delegate_to: localhost
+    with_items: "{{ocupacion.stdout_lines}}"
+
