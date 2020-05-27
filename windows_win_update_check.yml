@@ -1,5 +1,6 @@
 #ayalat Abril 2020
 ---
+#more info in https://docs.ansible.com/ansible/latest/modules/win_updates_module.html
 - name: Buscar actualizaciones de windows
   hosts: windows
   tasks:
@@ -27,6 +28,5 @@
       slack:
         domain: "{{ slack_domain }}"
         token: "{{ slack_token_lab }}"
-        msg: "ANSIBLE INFO !!! Ruego revises /ansible/backup_configuracion/{{ inventory_hostname }}/{{ inventory_hostname }}_ansible_wu_searched.txt el informe de parches para actualizar.
+        msg: "ANSIBLE INFO !!! Ya está disponible en /ansible/backup_configuracion/{{ inventory_hostname }}/{{ inventory_hostname }}_ansible_wu_searched.txt el informe de parches para actualizar. Ruego le eches un vistazo y sino dices nada, haré la actualización automática."
       delegate_to: localhost
-      
