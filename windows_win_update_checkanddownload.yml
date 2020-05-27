@@ -15,8 +15,6 @@
           - DefinitionUpdates
           - SecurityUpdates
           - Updates
-#        blacklist:
-#          - Microsoft Silverlight
         state: downloaded
         log_path: C:\{{ inventory_hostname }}_ansible_wu_searched_and_downloaded.txt
 
