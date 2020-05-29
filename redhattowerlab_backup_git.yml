@@ -2,9 +2,17 @@
 ---
 - name: GitHub Repositories
   hosts: redhattowerlab
-  gather_facts: true
+  gather_facts: false
   tasks:
     - name: Download https://github.com/rdspain/ansible-tower-samples.git
       git:
         repo: https://github.com/rdspain/ansible-tower-samples.git
         dest: /ansible/backup_configuracion/GitHub/ansible-tower-samples/
+
+    - name: Informo por Slack Lab
+      slack:
+        domain: "{{ slack_domain }}"
+        token: "{{ slack_token_lab }}"
+        msg: "ANSIBLE INFO !!! {{ ansible_fqdn }} - {{ ansible_hostname }} : Me he bajado una copia del proyecto https://github.com/rdspain/ansible-tower-samples.git en /ansible/backup_configuracion/GitHub/ansible-tower-samples/."
+      delegate_to: localhost
+
