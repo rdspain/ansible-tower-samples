@@ -34,16 +34,16 @@
         start_mode: manual
        # state: started
 
-    - name: Buscar actualizaciones e informar en fichero
-      win_updates:
-        category_names:
-          - Application
-          - CriticalUpdates
-          - DefinitionUpdates
-          - SecurityUpdates
-          - Updates
-        state: searched
-        log_path: C:\{{ inventory_hostname }}_ansible_wu_searched.txt
+    #- name: Buscar actualizaciones e informar en fichero
+    #  win_updates:
+    #    category_names:
+    #      - Application
+    #      - CriticalUpdates
+    #      - DefinitionUpdates
+    #      - SecurityUpdates
+    #      - Updates
+    #    state: searched
+    #    log_path: C:\{{ inventory_hostname }}_ansible_wu_searched.txt
 
     - name: Copiar fichero a servidor ansible
       fetch:
