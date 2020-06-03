@@ -2,16 +2,6 @@
 ---
 #more info in https://docs.ansible.com/ansible/latest/modules/win_updates_module.html
 
-- name: Preparativos
-  hosts: localhost
-  tasks:
-    - name: Create a directory if it does not exist
-      file:
-        path: /ansible/backup_configuracion
-        state: directory
-        mode: '0666'
-
-
 - name: Buscar actualizaciones de windows
   hosts: windows
   tasks:
