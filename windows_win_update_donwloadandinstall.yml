@@ -44,7 +44,7 @@
       slack:
         domain: "{{ slack_domain }}"
         token: "{{ slack_token_lab }}"
-        msg: "ANSIBLE INFO !!! Me bajo los parches y dejo el informe en /ansible/backup_configuracion/{{ inventory_hostname }}/{{ inventory_hostname }}_ansible_wu_searched_and_downloaded.txt. Me dispongo a instalarlos ahoramismo ..."
+        msg: "ANSIBLE INFO4Toni !!! Me bajo los parches y dejo el informe en /ansible/backup_configuracion/{{ inventory_hostname }}/{{ inventory_hostname }}_ansible_wu_searched_and_downloaded.txt. Me dispongo a instalarlos ahoramismo ..."
       delegate_to: localhost
 
 
