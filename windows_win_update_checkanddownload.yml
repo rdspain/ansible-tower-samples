@@ -1,7 +1,7 @@
 #ayalat Abril 2020
 ---
 - name: Windows
-  hosts: windows:!windows10lab
+  hosts: windows
   gather_facts: false
   tasks:
     - name: Hacerles ping
