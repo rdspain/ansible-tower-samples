@@ -31,6 +31,8 @@
           - DefinitionUpdates
           - SecurityUpdates
           - Updates
+          - ServicePacks
+          - UpdateRollups          
         state: downloaded
         log_path: C:\{{ inventory_hostname }}_ansible_wu_searched_and_downloaded.txt
 
