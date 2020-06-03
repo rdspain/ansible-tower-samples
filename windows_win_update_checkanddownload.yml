@@ -7,6 +7,22 @@
     - name: Hacerles ping
       win_ping:
 
+    - name: Ensure that WinRM is started when the system has settled
+      win_service:
+        name: WinRM
+        start_mode: delayed
+
+    - name: Check if Windows Update is installed
+      win_service:
+        name: wuauserv
+        register: service_info
+
+    - name: Set service startup mode to manual
+      win_service:
+        name: wuauserv
+        start_mode: manual
+       # state: started
+
     - name: Search and download Windows updates without installing them
       win_updates:
         category_names:
@@ -28,5 +44,5 @@
       slack:
         domain: "{{ slack_domain }}"
         token: "{{ slack_token_lab }}"
-        msg: "ANSIBLE INFO !!! Ya está disponible en /ansible/backup_configuracion/{{ inventory_hostname }}/{{ inventory_hostname }}_ansible_wu_searched_and_downloaded.txt el informe de parches para actualizar. Me los he descargado pero no instalado. Ruego le eches un vistazo y sino dices nada, haré la actualización automática."
+        msg: "ANSIBLE INFO4TONI !!! Dejo en /ansible/backup_configuracion/{{ inventory_hostname }}/{{ inventory_hostname }}_ansible_wu_searched_and_downloaded.txt el informe de parches para actualizar. Me los he descargado pero no instalado. Ruego le eches un vistazo y sino dices nada, haré la actualización automática una vez al mes."
       delegate_to: localhost
