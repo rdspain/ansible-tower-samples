@@ -32,6 +32,8 @@
           - DefinitionUpdates
           - SecurityUpdates
           - Updates
+          - ServicePacks
+          - UpdateRollups
         state: searched
         log_path: C:\{{ inventory_hostname }}_ansible_wu_searched.txt
 
