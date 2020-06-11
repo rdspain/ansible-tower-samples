@@ -27,12 +27,8 @@
     - name: Buscar actualizaciones e informar en fichero
       win_updates:
         category_names:
-          - Application
           - CriticalUpdates
-          - DefinitionUpdates
           - SecurityUpdates
-          - Updates
-          - ServicePacks
           - UpdateRollups
         state: searched
         log_path: C:\{{ inventory_hostname }}_ansible_wu_searched.txt
